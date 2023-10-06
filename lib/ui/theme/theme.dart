@@ -14,6 +14,11 @@ class CustomTheme {
         fontWeight: FontWeight.w600 ,
         fontFamily: FontFamily.vazir ,
       ),
+      bodySmall: TextStyle(
+        color: blackColor ,
+        fontSize: 15,
+        fontFamily: FontFamily.vazir ,
+      ),
     ),
   );
 }
