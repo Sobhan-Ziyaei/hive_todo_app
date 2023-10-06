@@ -9,6 +9,57 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/banking.png
+  AssetGenImage get banking => const AssetGenImage('assets/images/banking.png');
+
+  /// File path: assets/images/hard_working.png
+  AssetGenImage get hardWorking =>
+      const AssetGenImage('assets/images/hard_working.png');
+
+  /// File path: assets/images/icon_add.png
+  AssetGenImage get iconAdd =>
+      const AssetGenImage('assets/images/icon_add.png');
+
+  /// File path: assets/images/icon_edit.png
+  AssetGenImage get iconEdit =>
+      const AssetGenImage('assets/images/icon_edit.png');
+
+  /// File path: assets/images/icon_time.png
+  AssetGenImage get iconTime =>
+      const AssetGenImage('assets/images/icon_time.png');
+
+  /// File path: assets/images/meditate.png
+  AssetGenImage get meditate =>
+      const AssetGenImage('assets/images/meditate.png');
+
+  /// File path: assets/images/social_frends.png
+  AssetGenImage get socialFrends =>
+      const AssetGenImage('assets/images/social_frends.png');
+
+  /// File path: assets/images/work_meeting.png
+  AssetGenImage get workMeeting =>
+      const AssetGenImage('assets/images/work_meeting.png');
+
+  /// File path: assets/images/workout.png
+  AssetGenImage get workout => const AssetGenImage('assets/images/workout.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [
+        banking,
+        hardWorking,
+        iconAdd,
+        iconEdit,
+        iconTime,
+        meditate,
+        socialFrends,
+        workMeeting,
+        workout
+      ];
+}
+
 class $AssetsLottieGen {
   const $AssetsLottieGen();
 
@@ -22,6 +73,7 @@ class $AssetsLottieGen {
 class Assets {
   Assets._();
 
+  static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLottieGen lottie = $AssetsLottieGen();
 }
 
