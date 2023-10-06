@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_todo_app/router/app_router.dart';
 import 'package:hive_todo_app/ui/screens/splash_screen.dart';
 import 'package:hive_todo_app/ui/theme/theme.dart';
@@ -17,6 +18,14 @@ class MyApp extends StatelessWidget {
       theme: CustomTheme.lightTheme,
       onGenerateRoute: appRouter.onGenerateRoute,
       initialRoute: SplashScreen.screenId,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('fa'), // farsi
+      ],
     );
   }
 }

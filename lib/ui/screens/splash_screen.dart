@@ -3,16 +3,22 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive_todo_app/gen/assets.gen.dart';
 import 'package:hive_todo_app/ui/constant/colors.dart';
 import 'package:hive_todo_app/ui/constant/strings.dart';
+import 'package:hive_todo_app/ui/screens/home_screen.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key? key}) : super(key: key);
-  static const screenId = '/splash_screen' ;
+  static const screenId = '/splash_screen';
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    navigateScreen() ;
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -34,6 +40,16 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> navigateScreen() async {
+    Future.delayed(
+      const Duration(seconds: 5),
+    ).then(
+      (value) {
+        Navigator.pushReplacementNamed(context, HomeScreen.screenId);
+      },
     );
   }
 }
