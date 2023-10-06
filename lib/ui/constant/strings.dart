@@ -9,3 +9,9 @@ class HomeScreenStrings{
   static const sampleTime = '10:00' ;
   static const modify = 'ویرایش' ;
 }
+
+class AddTaskScreenStrings {
+  static const taskTitle = 'عنوان تسک' ;
+  static const taskDescription = 'توضیحات تسک';
+  static const addTask = 'اضافه کردن تسک' ;
+}

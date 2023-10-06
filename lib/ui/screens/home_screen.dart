@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_todo_app/gen/assets.gen.dart';
 import 'package:hive_todo_app/ui/constant/colors.dart';
 import 'package:hive_todo_app/ui/constant/strings.dart';
+import 'package:hive_todo_app/ui/screens/add_task_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -17,6 +18,11 @@ class _HomeScreenState extends State<HomeScreen> {
     ThemeData theme = Theme.of(context);
     return SafeArea(
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.pushNamed(context, AddTaskScreen.screenId);
+          },
+        ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
           child: Center(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_todo_app/ui/screens/add_task_screen.dart';
 import 'package:hive_todo_app/ui/screens/home_screen.dart';
 import 'package:hive_todo_app/ui/screens/splash_screen.dart';
 
@@ -12,6 +13,10 @@ class AppRouter {
       case HomeScreen.screenId:
         return MaterialPageRoute(
           builder: (context) => HomeScreen(),
+        );
+      case AddTaskScreen.screenId:
+        return MaterialPageRoute(
+          builder: (context) => AddTaskScreen(),
         );
       default:
         return null;
