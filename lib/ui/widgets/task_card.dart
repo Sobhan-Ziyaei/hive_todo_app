@@ -3,6 +3,7 @@ import 'package:hive_todo_app/gen/assets.gen.dart';
 import 'package:hive_todo_app/models/task.dart';
 import 'package:hive_todo_app/ui/constant/colors.dart';
 import 'package:hive_todo_app/ui/constant/strings.dart';
+import 'package:hive_todo_app/ui/screens/edit_task_screen.dart';
 
 // ignore: must_be_immutable
 class TaskCard extends StatefulWidget {
@@ -95,26 +96,38 @@ class _TaskCardState extends State<TaskCard> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Container(
-                        width: widget.size.width * 0.20,
-                        height: widget.size.height * 0.04,
-                        decoration: BoxDecoration(
-                          color: greyColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Assets.images.iconEdit.image(
-                              color: whiteColor,
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  EditTaskScreen(task: widget.task),
                             ),
-                            Text(
-                              HomeScreenStrings.modify,
-                              style: widget.theme.textTheme.bodySmall?.copyWith(
-                                  color: whiteColor,
-                                  fontWeight: FontWeight.w600),
-                            )
-                          ],
+                          );
+                        },
+                        child: Container(
+                          width: widget.size.width * 0.20,
+                          height: widget.size.height * 0.04,
+                          decoration: BoxDecoration(
+                            color: greyColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Assets.images.iconEdit.image(
+                                color: whiteColor,
+                              ),
+                              Text(
+                                HomeScreenStrings.modify,
+                                style: widget.theme.textTheme.bodySmall
+                                    ?.copyWith(
+                                        color: whiteColor,
+                                        fontWeight: FontWeight.w600),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(width: widget.size.width * 0.03),
