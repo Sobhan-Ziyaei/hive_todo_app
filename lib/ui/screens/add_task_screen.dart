@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_todo_app/models/task.dart';
 import 'package:hive_todo_app/ui/constant/colors.dart';
 import 'package:hive_todo_app/ui/constant/strings.dart';
 
@@ -10,6 +12,17 @@ class AddTaskScreen extends StatefulWidget {
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
+  final taskBox = Hive.box<Task>('taskBox');
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    titleController.dispose();
+    descriptionController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -24,6 +37,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               children: [
                 SizedBox(height: size.height * 0.05),
                 TextField(
+                  controller: titleController,
                   style: theme.textTheme.bodySmall,
                   decoration: InputDecoration(
                     labelText: AddTaskScreenStrings.taskTitle,
@@ -47,6 +61,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 ),
                 SizedBox(height: size.height * 0.03),
                 TextField(
+                  controller: descriptionController,
                   maxLines: 2,
                   style: theme.textTheme.bodySmall,
                   decoration: InputDecoration(
@@ -75,7 +90,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     minimumSize: Size(size.width * 0.10, size.height * 0.05),
                     backgroundColor: greenColor,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    addTask(titleController.text, descriptionController.text);
+                  },
                   child: Text(
                     AddTaskScreenStrings.addTask,
                     style: theme.textTheme.titleLarge?.copyWith(
@@ -91,5 +108,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         ),
       ),
     );
+  }
+
+  void addTask(String title, String description) {
+    var task = Task(title: title, description: description);
+    taskBox.add(task);
   }
 }

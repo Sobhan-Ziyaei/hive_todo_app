@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_todo_app/models/task.dart';
 import 'package:hive_todo_app/router/app_router.dart';
 import 'package:hive_todo_app/ui/screens/splash_screen.dart';
 import 'package:hive_todo_app/ui/theme/theme.dart';
 
-void main() {
-  runApp(MyApp(appRouter: AppRouter()));
+void main() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(TaskAdapter());
+  await Hive.openBox<Task>('taskBox');
+  runApp(
+    MyApp(
+      appRouter: AppRouter(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
