@@ -32,11 +32,16 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
           child: Center(
-            child: ListView.builder(
-              itemCount: taskBox.values.length,
-              itemBuilder: (context, index) {
-                var task = taskBox.values.toList()[index];
-                return TaskCard(size: size, theme: theme, task: task);
+            child: ValueListenableBuilder(
+              valueListenable: taskBox.listenable(),
+              builder: (context, value, child) {
+                return ListView.builder(
+                  itemCount: taskBox.values.length,
+                  itemBuilder: (context, index) {
+                    var task = taskBox.values.toList()[index];
+                    return TaskCard(size: size, theme: theme, task: task);
+                  },
+                );
               },
             ),
           ),

@@ -15,7 +15,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   final taskBox = Hive.box<Task>('taskBox');
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
-  
+
   @override
   void dispose() {
     super.dispose();
@@ -92,6 +92,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   ),
                   onPressed: () {
                     addTask(titleController.text, descriptionController.text);
+                    Navigator.pop(context);
                   },
                   child: Text(
                     AddTaskScreenStrings.addTask,

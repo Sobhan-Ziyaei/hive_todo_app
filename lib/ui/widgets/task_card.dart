@@ -4,6 +4,7 @@ import 'package:hive_todo_app/models/task.dart';
 import 'package:hive_todo_app/ui/constant/colors.dart';
 import 'package:hive_todo_app/ui/constant/strings.dart';
 
+// ignore: must_be_immutable
 class TaskCard extends StatefulWidget {
   TaskCard({
     super.key,
@@ -22,6 +23,7 @@ class TaskCard extends StatefulWidget {
 
 class _TaskCardState extends State<TaskCard> {
   bool isDone = false;
+
   @override
   void initState() {
     super.initState();
