@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_todo_app/gen/assets.gen.dart';
 import 'package:hive_todo_app/models/task.dart';
+import 'package:hive_todo_app/ui/constant/colors.dart';
 import 'package:hive_todo_app/ui/screens/add_task_screen.dart';
 import 'package:hive_todo_app/ui/widgets/task_card.dart';
 
@@ -19,10 +21,13 @@ class _HomeScreenState extends State<HomeScreen> {
     ThemeData theme = Theme.of(context);
     return SafeArea(
       child: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
         floatingActionButton: FloatingActionButton(
+          backgroundColor: greenColor,
           onPressed: () {
             Navigator.pushNamed(context, AddTaskScreen.screenId);
           },
+          child: Assets.images.iconAdd.image(),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
@@ -40,5 +45,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-
