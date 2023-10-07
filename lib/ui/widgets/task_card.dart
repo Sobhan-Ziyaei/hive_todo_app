@@ -4,7 +4,7 @@ import 'package:hive_todo_app/models/task.dart';
 import 'package:hive_todo_app/ui/constant/colors.dart';
 import 'package:hive_todo_app/ui/constant/strings.dart';
 
-class TaskCard extends StatelessWidget {
+class TaskCard extends StatefulWidget {
   TaskCard({
     super.key,
     required this.size,
@@ -17,25 +17,38 @@ class TaskCard extends StatelessWidget {
   Task task;
 
   @override
+  State<TaskCard> createState() => _TaskCardState();
+}
+
+class _TaskCardState extends State<TaskCard> {
+  bool isDone = false;
+  @override
+  void initState() {
+    super.initState();
+    isDone = widget.task.isDone;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: size.height * 0.03),
-      width: size.width,
-      height: size.height * 0.20,
+      margin: EdgeInsets.only(top: widget.size.height * 0.03),
+      width: widget.size.width,
+      height: widget.size.height * 0.20,
       decoration: BoxDecoration(
         color: whiteColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(
-            horizontal: size.width * 0.03, vertical: size.height * 0.02),
+            horizontal: widget.size.width * 0.03,
+            vertical: widget.size.height * 0.02),
         child: Row(
           children: [
             Expanded(
               flex: 2,
               child: Assets.images.banking.image(),
             ),
-            SizedBox(width: size.width * 0.02),
+            SizedBox(width: widget.size.width * 0.02),
             Expanded(
               flex: 3,
               child: Column(
@@ -45,27 +58,33 @@ class TaskCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        task.title,
-                        style: theme.textTheme.bodySmall?.copyWith(
+                        widget.task.title,
+                        style: widget.theme.textTheme.bodySmall?.copyWith(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),
                       ),
-                      //SizedBox(width: size.width * 0.10),
                       Checkbox(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),
                         ),
                         activeColor: greenColor,
-                        value: true,
-                        onChanged: (value) {},
+                        value: isDone,
+                        onChanged: (value) {
+                          setState(() {
+                            isDone = value!;
+                            widget.task.isDone = isDone;
+                            widget.task.save();
+                          });
+                        },
                       ),
                     ],
                   ),
-                  SizedBox(height: size.height * 0.01),
+                  SizedBox(height: widget.size.height * 0.01),
                   Text(
-                    task.description,
-                    style: theme.textTheme.bodySmall?.copyWith(
+                    widget.task.description,
+                    overflow: TextOverflow.ellipsis,
+                    style: widget.theme.textTheme.bodySmall?.copyWith(
                       fontSize: 10,
                       fontWeight: FontWeight.w600,
                     ),
@@ -75,8 +94,8 @@ class TaskCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
-                        width: size.width * 0.20,
-                        height: size.height * 0.04,
+                        width: widget.size.width * 0.20,
+                        height: widget.size.height * 0.04,
                         decoration: BoxDecoration(
                           color: greyColor,
                           borderRadius: BorderRadius.circular(10),
@@ -89,17 +108,17 @@ class TaskCard extends StatelessWidget {
                             ),
                             Text(
                               HomeScreenStrings.modify,
-                              style: theme.textTheme.bodySmall?.copyWith(
+                              style: widget.theme.textTheme.bodySmall?.copyWith(
                                   color: whiteColor,
                                   fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
                       ),
-                      SizedBox(width: size.width * 0.03),
+                      SizedBox(width: widget.size.width * 0.03),
                       Container(
-                        width: size.width * 0.20,
-                        height: size.height * 0.04,
+                        width: widget.size.width * 0.20,
+                        height: widget.size.height * 0.04,
                         decoration: BoxDecoration(
                           color: greenColor,
                           borderRadius: BorderRadius.circular(10),
@@ -109,11 +128,11 @@ class TaskCard extends StatelessWidget {
                           children: [
                             Assets.images.iconTime.image(
                               color: whiteColor,
-                              height: size.height * 0.02,
+                              height: widget.size.height * 0.02,
                             ),
                             Text(
                               HomeScreenStrings.sampleTime,
-                              style: theme.textTheme.bodySmall?.copyWith(
+                              style: widget.theme.textTheme.bodySmall?.copyWith(
                                   color: whiteColor,
                                   fontWeight: FontWeight.w600),
                             )
