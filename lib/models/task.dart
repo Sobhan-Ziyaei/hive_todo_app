@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 part 'task.g.dart';
@@ -14,9 +15,13 @@ class Task extends HiveObject{
   @HiveField(2)
   bool isDone;
 
+  @HiveField(3)
+  TimeOfDay time ;
+
   Task({
     required this.title,
     required this.description,
     this.isDone = false,
+    required this.time
   });
 }

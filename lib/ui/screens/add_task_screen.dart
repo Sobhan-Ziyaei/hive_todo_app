@@ -16,6 +16,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   final taskBox = Hive.box<Task>('taskBox');
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  TimeOfDay? time;
 
   @override
   void dispose() {
@@ -85,7 +86,45 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     ),
                   ),
                 ),
-                //showPersianDatePicker(context: context, initialDate: initialDate, firstDate: firstDate, lastDate: ,);
+                SizedBox(height: size.height * 0.05),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(size.width * 0.10, size.height * 0.05),
+                    backgroundColor: blackColor,
+                  ),
+                  onPressed: () async {
+                    var timeOfDay = await showPersianTimePicker(
+                        context: context, initialTime: TimeOfDay.now());
+                    setState(() {
+                      time = timeOfDay;
+                    });
+                  },
+                  child: Text(
+                    AddTaskScreenStrings.addTime,
+                    style: theme.textTheme.titleLarge?.copyWith(fontSize: 15),
+                  ),
+                ),
+                SizedBox(height: size.height * 0.04),
+                Row(
+                  children: [
+                    Text(
+                      AddTaskScreenStrings.selectTime,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                          color: blackColor,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const Spacer(),
+                    Text(
+                      '${time?.minute ?? '00'} : ${time?.hour ?? '00'}',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                          color: blackColor,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(width: size.width * 0.05),
+                  ],
+                ),
                 const Spacer(),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -93,7 +132,18 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     backgroundColor: greenColor,
                   ),
                   onPressed: () {
-                    addTask(titleController.text, descriptionController.text);
+                    if (time == null) {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return Container(
+                            child: Text('لطفا '),
+                          );
+                        },
+                      );
+                    }
+                    addTask(titleController.text, descriptionController.text,
+                        time!);
                     Navigator.pop(context);
                   },
                   child: Text(
@@ -113,8 +163,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     );
   }
 
-  void addTask(String title, String description) {
-    var task = Task(title: title, description: description);
+  void addTask(String title, String description, TimeOfDay time) {
+    var task = Task(title: title, description: description, time: time);
     taskBox.add(task);
   }
 }
